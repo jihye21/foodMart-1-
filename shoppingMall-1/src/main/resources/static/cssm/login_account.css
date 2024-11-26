@@ -1,0 +1,19 @@
+.create_account_step1 {
+    opacity: 0;
+}
+
+.create_account_step2 {
+	display: none;
+}
+
+.create_account_step3 {
+    display: none;
+}
+
+.create_account_step4 {
+    display: none;
+}
+
+.create_account_step5 {
+    display: none;
+}

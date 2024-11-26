@@ -1,0 +1,52 @@
+@charset 'utf-8';
+
+/*
+	Font
+*/
+
+
+/* Roboto */
+
+@font-face {
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 400;
+	src: url(../font/Roboto-Regular.woff2) format('woff2'),
+		url(../font/Roboto-Regular.woff) format('woff');
+		
+}
+
+@font-face {
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 500;
+	src: url(../font/Roboto-Medium.woff2) format('woff2'),
+		url(../font/Roboto-Medium.woff) format('woff');
+		
+}
+
+@font-face {
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 700;
+	src: url(../font/Roboto-Bold.woff2) format('woff2'),
+		url(../font/Roboto-Bold.woff) format('woff');
+	
+}
+
+@font-face {
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 900;
+	src: url(../font/Roboto-Black.woff2) format('woff2'),
+		url(../font/Roboto-Black.woff) format('woff');
+		
+}
+/* Myriad Pro */
+@font-face {
+	font-family: 'Myriad Pro';
+	font-style: normal;
+	font-weight: 900;
+	src:url(../font/MyriadPro-Bold.woff) format('woff');
+		
+}
