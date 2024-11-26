@@ -5,9 +5,41 @@
 	
 	<mapper namespace="com.example.demo.mapper.LoginMapper">
 		<insert id="memberRegist" parameterType="loginDTO">
-			insert into members (userId, userPw, userName, userAddr, userAddrDetail, userPost, userPhone, userEmail)
-        	values (#{MEMBER_ID}, #{MEMBER_PW}, #{MEMBER_NAME}, #{MEMBER_ADDR}, #{MEMBER_ADDR_DETAIL}
-        	, #{MEMBER_POST}, #{MEMBER_PHONE1}, #{MEMBER_EMAIL})
-  			
+		<![CDATA[
+    BEGIN
+        IF #{userEmail} NOT LIKE '%@pingpingi.co.kr' THEN
+            INSERT INTO members (
+                MEMBER_NUM, MEMBER_ID, MEMBER_PW, MEMBER_NAME, MEMBER_ADDR,
+                MEMBER_ADDR_DETAIL, MEMBER_POST, MEMBER_PHONE1, MEMBER_EMAIL
+            )
+            VALUES (
+                (SELECT CONCAT('mem_', NVL(MAX(SUBSTR(member_num, 5)), 0) + 1) FROM members),
+                #{userId}, #{userPw}, #{userName}, #{userAddr}, #{userAddrDetail},
+                #{userPost}, #{userPhone}, #{userEmail}
+            );
+        ELSIF #{userEmail} LIKE '%@pingpingi.co.kr' THEN
+            INSERT INTO employees (
+                EMP_NUM, EMP_ID, EMP_PW, EMP_NAME, EMP_ADDR,
+                EMP_ADDR_DETAIL, EMP_POST, EMP_PHONE, EMP_EMAIL
+            )
+            VALUES (
+                (SELECT CONCAT('emp_', NVL(MAX(SUBSTR(emp_num, 5)), 0) + 1) FROM employees),
+                #{userId}, #{userPw}, #{userName}, #{userAddr}, #{userAddrDetail},
+                #{userPost}, #{userPhone}, #{userEmail}
+            );
+        ELSE
+            NULL;
+        END IF;
+    END;
+    ]]>
 		</insert>
+		
+		
+	<select id="loginCheck" parameterType="loginDTO" resultType="auth">
+			select emp_id as userId, emp_num as userNum from employees
+			where #{userId} = emp_id AND #{userPw} = emp_pw
+			UNION
+			select member_id as userId, member_num as userNum from members
+			where #{userId} = member_id AND #{userPw} = member_pw
+	</select>
 	</mapper>

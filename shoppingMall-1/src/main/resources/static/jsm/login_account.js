@@ -1,14 +1,14 @@
 jQuery(window).ready(function() {
-	var certNoTimeoutInterval;
-	var certNoTimeoutText;
+	//var certNoTimeoutInterval;
+	//var certNoTimeoutText;
 	var isCertEmail = false;
 	
 	//임시 회원가입
 	//isCertEmail = false;
-					$('#certiNum').removeClass('on');
+					//$('#certiNum').removeClass('on');
 					$('.create_account_step2').hide();
 					$('.ment').text('이메일 인증이 필요합니다.');
-					clearInterval(certNoTimeoutInterval);
+					//clearInterval(certNoTimeoutInterval);
 					//$('.create_account_step3').fadeTo('slow',1);
 					//$('.create_account_step4').fadeTo('slow',1);
 					//$('.create_account_step5').fadeTo('slow',1);
@@ -138,8 +138,11 @@ jQuery(window).ready(function() {
 			$('#email').focus();
 			return;
 		}
+		
 		window.webjModalPopup = true;
 		$('#sendEmailProgress').modal();
+		ajaxSendCertNoEmail(email);
+		/*
 		ajaxSendCertNoEmail(email, function(){
 			window.webjModalPopup = false;
 			$('#sendEmailProgress').modal({show:false});
@@ -168,6 +171,7 @@ jQuery(window).ready(function() {
 				$('.num').text(certNoTimeoutText);
 			}, 1000);
 		});		
+		*/
 	}
 	/*
 	var checkEmailCertNo = function() {
@@ -264,14 +268,15 @@ jQuery(window).ready(function() {
 	        url: "sendEmail",
 	        data: {email: email},
 	        success: function() {
+				window.webjModalPopup = false;
 	            $('#sendEmailProgress').modal({show:false});
 				
 				isCertEmail = true;
-				$('.ment').text('이메일 인증이 완료되었습니다.');
+				$('.ment').hide();
 				$('.sendCertNoEmail').prop('disabled', true);
 				$('.sendCertNoEmail').text('인증완료');
 				$('#email').prop('readonly', true);
-				clearInterval(certNoTimeoutInterval);
+				
 				$('.create_account_step3').fadeTo('slow',1);
 				$('.create_account_step4').fadeTo('slow',1);
 				$('.create_account_step5').fadeTo('slow',1);

@@ -22,11 +22,12 @@ public class SignupController {
 		return "thymeleaf/signup/signupPage";
 	}
 	
+	/*
 	@PostMapping("signupPage")
 	public String signupPagePost() {
 		return "redirect:signupPage";
 	}
-	
+	*/
 	@Autowired
 	CreateAccountService createAccuontService;
 	

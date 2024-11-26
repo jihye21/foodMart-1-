@@ -13,6 +13,6 @@ public class UserCommand {
 	String addr;
 	String addrDetail;
 	String post;
-	Number phone;
+	Integer phone;
 	String email;
 }

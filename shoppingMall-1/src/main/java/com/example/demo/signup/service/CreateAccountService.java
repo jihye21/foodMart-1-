@@ -18,9 +18,12 @@ public class CreateAccountService {
 	
 	public void execute(UserCommand command) {
 		LoginDTO dto = new LoginDTO();
+		
+		dto.setUserEmail(command.getEmail());
 		dto.setUserId(command.getId());
 		dto.setUserPw(command.getPassword());
 		dto.setUserName(command.getName());
+		dto.setUserAddr(command.getAddr());
 		dto.setUserAddrDetail(command.getAddrDetail());
 		dto.setUserPost(command.getPost());
 		dto.setUserPhone(command.getPhone());

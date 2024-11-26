@@ -17,6 +17,6 @@ public class LoginDTO {
 	String userAddr;
 	String userAddrDetail;
 	String userPost;
-	Number userPhone;
+	Integer userPhone;
 	String userEmail;
 }	

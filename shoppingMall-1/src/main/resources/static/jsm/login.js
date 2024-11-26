@@ -1,19 +1,18 @@
 jQuery(window).ready(function() {
 	var initView = function() {
 		initEvent();
-		initEmail();
 	}
 	var initEvent = function() {
 		$('.btn_m_c1').click(function(e){
 			loginProcess();
 		});
-		$('#email').keypress(function(e){
-			$('#email').removeClass('on');
-			$('#email').addClass('off');
+		$('#userId').keypress(function(e){
+			$('#userId').removeClass('on');
+			$('#userId').addClass('off');
 			$('.ment').text('');
 			if (e.keyCode == 13) {
-				var email = $('#email').val().trim();
-				if (webj.isNotEmptyString(email)) {
+				var userId = $('#userId').val().trim();
+				if (webj.isNotEmptyString(userId)) {
 					loginProcess();	
 				}
 				return false;
@@ -29,53 +28,41 @@ jQuery(window).ready(function() {
 			window.open('https://kauth.kakao.com/oauth', '', 'width=480, height=520');
 		});
 	}
-	var initEmail = function() {
-		var loginEmail = webj.getCookie('webjangi_login_email');
-		if (webj.isNotEmptyString(loginEmail)) {
-			$('#email').val(loginEmail);
-			//$('.ment').text('이전 로그인 이메일이 자동으로 입력되었습니다.');
-		}
-	}
+	
 	// Process
 	var loginProcess = function() {
-		var email = $('#email').val().trim();
-		if (webj.isEmptyString(email)) {
-			$('#email').removeClass('off');
-			$('#email').addClass('on');
-			$('.ment').text('이메일 주소를 입력해 주세요.');
-			$('#email').focus();
+		var userId = $('#userId').val().trim();
+		if (userId == null) {
+			$('#userId').removeClass('off');
+			$('#userId').addClass('on');
+			$('.ment').text('아이디를 입력해 주세요.');
+			$('#userId').focus();
 			return;
 		}
-		if (!email.startsWith('webjangi_') && !webj.validateEmail(email)) {
-			$('#email').removeClass('off');
-			$('#email').addClass('on');
-			$('.ment').text('잘못된 형식의 이메일입니다.');
-			$('#email').focus();
-			return;
-		}
-		ajaxGetRegisteredEmail(email, function(email){
-			if (email) {
-				webj.setCookie('webjangi_login_email', email);
-				location.replace('/loginPassword');
-			} else {
-				webj.openWarningPopup('이메일 확인 또는 새 계정 만들어 주세요.', function(){
-					$('#email').focus();
-				});
-				return;
+		
+		var userPw = $('#userPw').val().trim();
+				if (userPw == null) {
+					$('#userPw').removeClass('off');
+					$('#userPw').addClass('on');
+					$('.ment').text('비밀번호를 입력해 주세요.');
+					$('#userPw').focus();
+					return;
+				}
+				
+		$.ajax({
+			type: 'POST',
+			url: 'loginCheck',
+			data: {userPw:userPw, userId:userId},
+			success: function(){
+				location.replace("/");
+			},
+			error: function(){
+				alert("다시 로그인해주세요");
 			}
-		});		
+			
+		});
+	
 	}
-	// Ajax
-	var ajaxGetRegisteredEmail = function(email, callback) {
-		webj.ajaxPost('/login/validateRegisteredEmailForLogin', {email:email}, function(data) {
-	        if (data.result == 'success') {
-	        	if (callback != null) {
-	        		callback(data.email);
-	        	}
-	        } else {
-	            $('.ment').text(data.resultMessage);
-	        }
-	    }); 
-	}
+	
 	initView();
 });
