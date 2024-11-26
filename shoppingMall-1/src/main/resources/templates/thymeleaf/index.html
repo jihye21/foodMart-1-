@@ -119,8 +119,19 @@
               <strong>$20</strong>
             </li>
           </ul>
-  
-          <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+  		<div th:if = "${auth != null}">
+	  		<span th:if = "${auth.userNum.contains('emp')}">
+	  			<a href = "product/regist">
+	  			<button class="w-100 btn btn-primary btn-lg" type="submit">regist product</button>
+	  			</a>
+	  		</span>
+	  		<span th:if = "${auth.userNum.contains('mem')}">
+	  			<button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+	  		</span>
+  		</div>
+  		
+          
+        
         </div>
       </div>
     </div>
