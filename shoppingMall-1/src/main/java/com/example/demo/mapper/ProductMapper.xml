@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+	"-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<mapper namespace="com.example.demo.mapper.ProductMapper">
+		<insert id="regist" parameterType="productDTO">
+			insert into goods 
+			(GOODS_NUM
+			, GOODS_NAME, GOODS_PRICE, GOODS_CONTENTS
+			, GOODS_MAIN_IMAGE, GOODS_MAIN_STORE_IMAGE
+			, GOODS_DETAIL_IMAGE, GOODS_DETAIL_STORE_IMAGE
+			, EMP_NUM, GOODS_REGIST
+			)
+			values (
+			(select concat('goods_',
+			max(substr(goods_num, 7)) + 1) from goods)
+			, #{goodsName}, #{goodsPrice}, #{goodsContents}
+			, #{goodsMainImage}, #{goodsMainStoreImage}
+			, #{goodsDetailImage}, #{goodsDetailStoreImage}
+			, #{empNum}, SYSDATE
+			)
+			
+		</insert>
+		
+		<select id="productList" resultType="productDTO">
+			select GOODS_NAME, GOODS_PRICE, GOODS_CONTENTS
+			, GOODS_MAIN_IMAGE
+			from goods
+		</select>
+		
+		<select id="productDetail" parameterType="string" resultType="productDTO">
+			select GOODS_NAME, GOODS_PRICE, GOODS_CONTENTS
+			, VISIT_COUNT, GOODS_MAIN_IMAGE, GOODS_DETAIL_IMAGE
+			from goods
+			where GOODS_NAME = #{goodsName}
+		</select>
+	</mapper>

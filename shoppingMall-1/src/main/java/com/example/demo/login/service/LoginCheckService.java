@@ -30,7 +30,6 @@ public class LoginCheckService {
 		if(auth != null) {
 			session = request.getSession();
 			session.setAttribute("auth", auth);
-			System.out.println(auth);
 		}
 		
 	}
