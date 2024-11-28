@@ -272,11 +272,12 @@ jQuery(window).ready(function() {
 	            $('#sendEmailProgress').modal({show:false});
 				
 				isCertEmail = true;
-				$('.ment').hide();
+				
 				$('.sendCertNoEmail').prop('disabled', true);
 				$('.sendCertNoEmail').text('인증완료');
 				$('#email').prop('readonly', true);
 				
+				$('.w_box').hide();
 				$('.create_account_step3').fadeTo('slow',1);
 				$('.create_account_step4').fadeTo('slow',1);
 				$('.create_account_step5').fadeTo('slow',1);
