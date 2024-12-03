@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.command.ProductCommand;
+import com.example.demo.mapper.HeartMapper;
 import com.example.demo.product.service.ProductDetailService;
 import com.example.demo.product.service.ProductRegistService;
 
@@ -39,8 +40,8 @@ public class ProductController {
 	ProductDetailService productDetailService;
 	
 	@GetMapping("detail")
-	public String detail(@RequestParam String goodsName, Model model) {
-		productDetailService.execute(goodsName, model);
+	public String detail(@RequestParam String goodsName, Model model, HttpSession session) {
+		productDetailService.execute(goodsName, model, session);
 		return "thymeleaf/product/detail";
 	}
 }

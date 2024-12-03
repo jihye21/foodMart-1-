@@ -220,7 +220,8 @@
           </div>
           
           <div class="col-sm-8 col-lg-4 d-flex justify-content-end gap-5 align-items-center mt-4 mt-sm-0 justify-content-center justify-content-sm-end">
-            <div class="support-box text-end d-none d-xl-block">
+            
+            <div class="support-box text-end d-none d-xl-block" th:if = "${auth == null}">
               <span class="fs-6 text-muted">For Support?</span>
               <h5 class="mb-0">010-2357-7949</h5>
             </div>
@@ -672,8 +673,44 @@
                   
                     <div class="col" th:each = "dto: ${list}">
                       <div class="product-item">
-                        <span class="badge bg-success position-absolute m-3">품절 여부</span>
-                        <a class="btn-wishlist"><svg width="24" height="24"><use xlink:href="#heart"></use></svg></a>
+                        <span class="badge bg-success position-absolute m-3">품절</span>
+                        <a class="btn-wishlist" th:data-goods-name = "${dto.goodsName}">
+	                        
+	                        <span th:if="${auth == null}">
+		                        <svg width="24" height="24">
+		                        <use xlink:href="#heart"></use>
+		                        </svg>
+	                        </span>
+	                        
+                        	<span th:if="${auth != null}">
+                        	
+                        		<!-- wish list 항목이 있을 경우 -->
+		                        <span th:each="wish : ${heartList}">
+		                        	<span th:if="${wish.goodsNum != null}">
+									    <span th:if="${wish.goodsNum == dto.goodsNum}">
+									    <svg width="24" height="24">
+									    <use xlink:href="#heart-filled"></use>
+									    </svg>
+									    </span>
+									    
+									    <span th:if="${wish.goodsNum != dto.goodsNum}">
+									    <svg width="24" height="24">
+									    <use xlink:href="#heart"></use>
+									    </svg>
+									    </span>
+								    </span>
+								</span>
+								
+								<!-- wish list 항목이 없을 경우 -->
+								<span th:if="${heartList == null or heartList.size() == 0}">
+									<svg width="24" height="24">
+									<use xlink:href="#heart"></use>
+									</svg>
+								</span>
+								
+	                        </span>
+                        	
+                        </a>
                         <figure>
                           <a th:href="|product/detail?goodsName=${dto.goodsName}|" title="Product Title">
                             <img th:src = "|../static/upload/${dto.goodsMainImage}|" class="tab-image" style = "width:100%">

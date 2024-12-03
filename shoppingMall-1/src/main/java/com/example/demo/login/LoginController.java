@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.login.service.LoginCheckService;
+import com.example.demo.product.service.ProductListService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -24,6 +25,8 @@ public class LoginController {
 	
 	@Autowired
 	LoginCheckService loginCheckService;
+	@Autowired
+	ProductListService productListService;
 	
 	@PostMapping("loginCheck")
 	public String loginCheck(HttpServletRequest request, HttpSession session,

@@ -1,11 +1,16 @@
 package com.example.demo.login.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.example.demo.mapper.HeartMapper;
 import com.example.demo.mapper.LoginMapper;
 import com.example.demo.model.AuthInfoDTO;
+import com.example.demo.model.HeartDTO;
 import com.example.demo.model.LoginDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,7 +21,7 @@ public class LoginCheckService {
 
 	@Autowired
 	LoginMapper loginMapper;
-	
+
 	public void execute(HttpServletRequest request, HttpSession session, Model model, 
 			String userId, String userPw) {
 		LoginDTO dto = new LoginDTO();
@@ -30,6 +35,7 @@ public class LoginCheckService {
 		if(auth != null) {
 			session = request.getSession();
 			session.setAttribute("auth", auth);
+			
 		}
 		
 	}

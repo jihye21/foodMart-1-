@@ -14,5 +14,7 @@ public interface ProductMapper {
 	public List<productDTO> productList();
 
 	public productDTO productDetail(String goodsName);
-	
+
+	public String selectGoodsNum(String goodsName);
+
 }

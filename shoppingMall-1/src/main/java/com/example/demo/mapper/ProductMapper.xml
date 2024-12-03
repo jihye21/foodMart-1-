@@ -24,7 +24,7 @@
 		</insert>
 		
 		<select id="productList" resultType="productDTO">
-			select GOODS_NAME, GOODS_PRICE, GOODS_CONTENTS
+			select GOODS_NAME, goods_num, GOODS_PRICE, GOODS_CONTENTS
 			, GOODS_MAIN_IMAGE
 			from goods
 		</select>
@@ -34,5 +34,11 @@
 			, VISIT_COUNT, GOODS_MAIN_IMAGE, GOODS_DETAIL_IMAGE
 			from goods
 			where GOODS_NAME = #{goodsName}
+		</select>
+		
+		<select id="selectGoodsNum" parameterType="string" resultType="string">
+			select goods_num
+			from goods
+			where goods_name = #{goodsName}
 		</select>
 	</mapper>
