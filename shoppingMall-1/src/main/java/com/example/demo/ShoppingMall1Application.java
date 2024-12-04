@@ -10,8 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.example.demo.mapper.CartMapper;
 import com.example.demo.mapper.HeartMapper;
 import com.example.demo.model.AuthInfoDTO;
+import com.example.demo.model.CartDTO;
 import com.example.demo.model.HeartDTO;
 import com.example.demo.product.service.ProductListService;
 
@@ -32,6 +34,9 @@ public class ShoppingMall1Application {
 	@Autowired
 	HeartMapper heartMapper;
 	
+	@Autowired
+	CartMapper cartMapper;
+	
 	@GetMapping("/")
 	public String index(HttpSession session, Model model) {
 		
@@ -40,13 +45,19 @@ public class ShoppingMall1Application {
 		
 		if(auth != null)
 		{
+			//로그인 정보 가져오기
 			model.addAttribute("auth", auth);
+			String memberNum = auth.getUserNum();
 			
+			//heart list 가져오기
 			List<HeartDTO> list = new ArrayList<HeartDTO>();
-			
-			list = heartMapper.selectHeartList(auth.getUserNum());
-			
+			list = heartMapper.selectHeartList(memberNum);
 			model.addAttribute("heartList", list);
+			
+			//cart list 가져오기
+			List<CartDTO> cartList = new ArrayList<CartDTO>();
+			cartList = cartMapper.cartList(memberNum);
+			model.addAttribute("cartList", cartList);
 		}
 		
 		//product list 가져오기

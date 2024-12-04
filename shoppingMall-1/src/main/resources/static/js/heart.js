@@ -11,12 +11,12 @@ $(function(){
 			//wish Table에 추가하기
 			$.ajax({
 				type: "POST",
-				url: "heart/heartAdd",
+				url: "../heart/heartAdd",
 				data: {goodsName: goodsName},
 				success: function(){
 				}, error: function(){
 					alert("로그인이 필요합니다.");
-					window.location.href = "login/loginPage";
+					window.location.href = "../login/loginPage";
 				}
 			})
 		}
@@ -28,14 +28,14 @@ $(function(){
 			//wish table에서 삭제하기
 			$.ajax({
 				type: "POST",
-				url: "heart/heartDel",
+				url: "../heart/heartDel",
 				data: {goodsName: goodsName},
 				success: function(){
 					
 				},
 				error: function(){
 					alert("로그인이 필요합니다.");
-					window.location.href = "login/loginPage";
+					window.location.href = "../login/loginPage";
 				}
 				
 			})

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+	"-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<mapper namespace="com.example.demo.mapper.CartMapper">
+		<insert id="cartAdd" parameterType="cartDTO">
+			insert into cart 
+				(MEMBER_NUM, GOODS_NUM, 
+				CART_DATE, 
+				CART_QTY)
+				values (#{memberNum}, #{goodsNum},
+				SYSDATE, #{cartQty})
+		</insert>
+		
+		<select id="cartCheck" parameterType="cartDTO" resultType="integer">
+			select COUNT(*) from cart
+			where member_num = #{memberNum} and goods_num = #{goodsNum}
+		</select>
+		
+		<update id="cartUpdate" parameterType="cartDTO">
+			update cart set 
+			cart_qty = cart_qty + #{cartQty}
+			where member_num = #{memberNum} and goods_num = #{goodsNum}
+		</update>
+		
+		<select id="cartList" parameterType="string" resultType="cartDTO">
+			select goods_name, goods_contents, goods_price, cart_qty
+			from cart c join goods g on 
+			g.goods_num = c.goods_num
+			where member_num = #{memberNum}
+			order by cart_num ASC
+		</select>
+		
+		<update id="updateList">
+			update cart set 
+			cart_qty = #{cartQty} 
+			where goods_num = #{goodsNum} and member_num = #{memberNum}
+		</update>
+	</mapper>

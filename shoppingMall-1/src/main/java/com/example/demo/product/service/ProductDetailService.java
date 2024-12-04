@@ -21,9 +21,6 @@ public class ProductDetailService {
 	@Autowired
 	ProductMapper productMapper;
 	
-	@Autowired
-	HeartMapper heartMapper;
-	
 	public void execute(String goodsName, Model model, HttpSession session) {
 		
 		productDTO dto = new productDTO();
@@ -32,19 +29,7 @@ public class ProductDetailService {
 		
 		model.addAttribute("dto", dto);
 		
-		//로그인 session 저장
-			AuthInfoDTO auth = (AuthInfoDTO) session.getAttribute("auth");
-			
-			if(auth != null)
-			{
-				model.addAttribute("auth", auth);
-				
-				List<HeartDTO> list = new ArrayList<HeartDTO>();
-				
-				list = heartMapper.selectHeartList(auth.getUserNum());
-				
-				model.addAttribute("heartList", list);
-			}
+		System.out.println(dto);
 	}
 	
 }

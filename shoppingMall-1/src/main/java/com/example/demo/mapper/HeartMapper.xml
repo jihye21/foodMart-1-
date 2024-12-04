@@ -10,7 +10,9 @@
 		</insert>
 		
 		<select id="selectHeartList" parameterType="string" resultType="heartDTO">
-			select * from wish where MEMBER_NUM = #{memberNum}
+			select * from wish w join goods g 
+			on g.goods_num = w.goods_num 
+			where MEMBER_NUM = #{memberNum} 
 		</select>
 		
 		<delete id="heartDel" parameterType="heartDTO">

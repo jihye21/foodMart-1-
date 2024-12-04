@@ -24,13 +24,13 @@
 		</insert>
 		
 		<select id="productList" resultType="productDTO">
-			select GOODS_NAME, goods_num, GOODS_PRICE, GOODS_CONTENTS
+			select GOODS_NUM, GOODS_NAME, goods_num, GOODS_PRICE, GOODS_CONTENTS
 			, GOODS_MAIN_IMAGE
 			from goods
 		</select>
 		
 		<select id="productDetail" parameterType="string" resultType="productDTO">
-			select GOODS_NAME, GOODS_PRICE, GOODS_CONTENTS
+			select GOODS_NUM, GOODS_NAME, GOODS_PRICE, GOODS_CONTENTS
 			, VISIT_COUNT, GOODS_MAIN_IMAGE, GOODS_DETAIL_IMAGE
 			from goods
 			where GOODS_NAME = #{goodsName}

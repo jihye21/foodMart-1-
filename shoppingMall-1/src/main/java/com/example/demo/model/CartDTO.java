@@ -1,17 +1,19 @@
 package com.example.demo.model;
 
+import java.util.Date;
+
 import org.apache.ibatis.type.Alias;
-import org.springframework.stereotype.Component;
 
 import lombok.Data;
 
-@Component
-@Alias("heartDTO")
 @Data
-public class HeartDTO {
+@Alias("cartDTO")
+public class CartDTO {
 	String memberNum;
 	String goodsNum;
 	String goodsName;
+	Date cartDate;
+	Integer cartQty;
+	String CartNum;
 	Integer goodsPrice;
-	String goodsContents;
 }
