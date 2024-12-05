@@ -82,7 +82,7 @@
 		</symbol>
       </defs>
     </svg>
-
+	
     <div class="preloader-wrapper">
       <div class="preloader">
       </div>
@@ -97,10 +97,70 @@
     <!-- member mode -->
     	<div th:if = "${auth != null}">
     	<span th:if = "${auth.userNum.contains('mem')}">
+    	<!-- 주문자 정보 -->
+    	
+    	<div class = "info">
+    	<h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-primary">Purchase Order</span>
+            <span class="badge bg-primary rounded-pill">&nbsp;</span>
+          </h4>
+          
+          <ul class="list-group mb-3">
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+          		<span><b>이름</b></span>
+          	</li>
+          	<li class="list-group-item d-flex justify-content-between lh-sm">
+              <div>
+                <small class="text-body-secondary">
+                	<input type = "text" class="form-control" name = "deliveryName" id = "deliveryName">
+                </small>
+              </div>
+            	
+            </li>
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+          		<span><b>연락처</b></span>
+          	</li>
+          	<li class="list-group-item d-flex justify-content-between lh-sm">
+              <div>
+                <small class="text-body-secondary">
+                	<input type = "text" class="form-control" name = "deliveryPhone" id = "deliveryPhone">
+                </small>
+              </div>
+            	
+            </li>
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+          	<span><b>배송지 정보</b></span>
+          </li>
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+              <div>
+              <b>주소</b>
+                <small class="text-body-secondary">
+                	<input type = "text" class="form-control" name = "deliveryPost" id = "deliveryPost" placeholder="우편번호">
+                	<input type = "text" class="form-control" name = "deliveryAddr" id = "deliveryAddr" placeholder="주소">
+                	<input type = "text" class="form-control" name = "deliveryAddrDetail" id = "deliveryAddrDetail" placeholder="상세주소">
+                </small>
+              </div>
+            	
+            </li>
+           <li class="list-group-item d-flex justify-content-between lh-sm">
+          		<span><b>배송 요청 사항</b></span>
+          	</li>
+          	<li class="list-group-item d-flex justify-content-between lh-sm">
+              <div>
+                <small class="text-body-secondary">
+                	<input type = "text" class="form-control" name = "message" id = "message">
+                </small>
+              </div>
+            	
+            </li>
+          </ul>
+         </div>
+          
           <h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-primary">Your cart</span>
             <span class="badge bg-primary rounded-pill">[[${cartList.size}]]</span>
           </h4>
+          
           <ul class="list-group mb-3">
           <li class="list-group-item d-flex justify-content-between lh-sm">
           	<input type = "checkbox" id = "allCheck">
@@ -108,8 +168,9 @@
             <li class="list-group-item d-flex justify-content-between lh-sm"
             th:each="cart : ${cartList}">
               <div>
+              	<input type = "hidden" id = "goodsNum" th:value = "${cart.goodsNum}">
               	<input type = "hidden" id = "goodsName" th:value = "${cart.goodsName}">
-                <h6 class="my-0"><input type = "checkbox" id = "checkbox">&nbsp;&nbsp;[[${cart.goodsName}]]</h6>
+                <h6 class="my-0"><input type = "checkbox" class = "checkbox">&nbsp;&nbsp;[[${cart.goodsName}]]</h6>
                 <small class="text-body-secondary">
                 	<div class="input-group product-qty">
                         <span class="input-group-btn">
@@ -136,6 +197,8 @@
               <strong id = "total">0</strong><strong>₩</strong>
             </li>
           </ul>
+          
+          
         </span>
         
    <!-- employee mode -->
@@ -169,6 +232,10 @@
 	<!-- member mode -->
 	  		<span th:if = "${auth.userNum.contains('mem')}">
 	  			<button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+	  			<!-- 주문 정보 버튼 -->
+	  			<div class = "info">
+	  			<button class="w-100 btn btn-primary btn-lg info" type="submit">Continue to checkout</button>
+	  			</div>
 	  		</span>
   		</div>
   		
@@ -326,7 +393,7 @@
 	            <div class="cart text-end d-none d-lg-block dropdown">
 	              <button class="border-0 bg-transparent d-flex flex-column gap-2 lh-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"aria-controls="offcanvasCart"\>
 	                <span class="fs-6 text-muted dropdown-toggle">Your Cart</span>
-	                <span class="cart-total fs-5 fw-bold">$0</span>
+	                
 	              </button>
 	            </div>
 	            </span>

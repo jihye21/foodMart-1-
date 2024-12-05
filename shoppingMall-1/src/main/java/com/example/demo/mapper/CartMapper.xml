@@ -25,7 +25,7 @@
 		</update>
 		
 		<select id="cartList" parameterType="string" resultType="cartDTO">
-			select goods_name, goods_contents, goods_price, cart_qty
+			select c.goods_num, goods_name, goods_contents, goods_price, cart_qty
 			from cart c join goods g on 
 			g.goods_num = c.goods_num
 			where member_num = #{memberNum}

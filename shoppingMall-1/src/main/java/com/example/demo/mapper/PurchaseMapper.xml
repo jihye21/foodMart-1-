@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+	"-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<mapper namespace="com.example.demo.mapper.PurchaseMapper">
+		<insert id="insert" parameterType="infoDTO">
+			insert into purchase 
+			(PURCHASE_NUM, PURCHASE_DATE, PURCHASE_PRICE, DELIVERY_ADDR 
+			, DELIVERY_ADDR_DETAIL, DELIVERY_POST, DELIVERY_PHONE
+			, MESSAGE, PURCHASE_STATUS, DELIVERY_NAME, PURCHASE_NAME)
+			values (PURCHASE_SEQ.NEXTVAL
+			, SYSDATE, #{purchasePrice}, #{deliveryAddr}
+			, #{deliveryAddrDetail}, #{deliveryPost}, #{deliveryPhone}
+			, #{message}, '결제중', #{deliveryName}, #{purchaseName})
+		</insert>
+	</mapper>
