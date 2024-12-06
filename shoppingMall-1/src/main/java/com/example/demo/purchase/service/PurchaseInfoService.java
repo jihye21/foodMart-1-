@@ -25,9 +25,12 @@ public class PurchaseInfoService {
 	@Autowired
 	ProductMapper productMapper;
 	
-	public void execute(PurchaseDTO dto, HttpSession session) {
+	public String execute(PurchaseDTO dto, HttpSession session) {
 		AuthInfoDTO auth = (AuthInfoDTO) session.getAttribute("auth");
 		String memberNum = auth.getUserNum();
+		
+		//purchaseNum 생성하기
+		String purchaseNum = purchaseMapper.selectNum();
 		
 		List<ItemDTO> items = dto.getItems();
 		
@@ -42,7 +45,11 @@ public class PurchaseInfoService {
 		info.setPurchaseName(memberNum);
 		info.setPurchasePrice(purchasePrice);
 		
+		info.setPurchaseNum(purchaseNum);
+		
 		purchaseMapper.insert(info);
 		
+		
+		return purchaseNum;
 	}
 }

@@ -19,7 +19,9 @@ public class InfoDTO {
 	
 	//회원 정보
 	String memberNum;
-	
+
+
+	String purchaseNum;
 	//구매자 정보
 	String deliveryName;
 	Integer purchasePrice;

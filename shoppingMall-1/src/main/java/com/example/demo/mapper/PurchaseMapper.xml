@@ -4,14 +4,30 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 	<mapper namespace="com.example.demo.mapper.PurchaseMapper">
+		<select id="selectNum" resultType="string">
+			select concat(to_char(SYSDATE,'yyyyMMdd') 
+			, COALESCE(max(to_number(substr(purchase_num,9))),0 ) +1)
+			from purchase
+			where substr(purchase_num,1 ,8) = to_char(sysdate,'yyyyMMdd')
+		</select>
 		<insert id="insert" parameterType="infoDTO">
 			insert into purchase 
 			(PURCHASE_NUM, PURCHASE_DATE, PURCHASE_PRICE, DELIVERY_ADDR 
 			, DELIVERY_ADDR_DETAIL, DELIVERY_POST, DELIVERY_PHONE
-			, MESSAGE, PURCHASE_STATUS, DELIVERY_NAME, PURCHASE_NAME)
-			values (PURCHASE_SEQ.NEXTVAL
+			, MESSAGE, PURCHASE_STATUS)
+			values (#{purchaseNum}
 			, SYSDATE, #{purchasePrice}, #{deliveryAddr}
 			, #{deliveryAddrDetail}, #{deliveryPost}, #{deliveryPhone}
-			, #{message}, '결제중', #{deliveryName}, #{purchaseName})
+			, #{message}, '결제중')
+			
 		</insert>
+		
+		<select id="selectOne" parameterType="string" resultType="infoDTO">
+			select PURCHASE_NUM, PURCHASE_DATE, PURCHASE_PRICE, DELIVERY_ADDR
+			, DELIVERY_ADDR_DETAIL, DELIVERY_POST, DELIVERY_PHONE
+			, MESSAGE, PURCHASE_STATUS, MEMBER_NUM, DELIVERY_NAME
+			, PURCHASE_NAME
+
+			from purchase where purchase_num = #{purchaseNum}
+		</select>
 	</mapper>

@@ -191,8 +191,22 @@ $(function(){
 			url: "/purchase/info",
 			contentType: 'application/json',
 			data: JSON.stringify(data),
-			success: function(){
-				
+			success: function(purchaseNum){
+				$.ajax({
+					type: "GET",
+					url: "/purchase/payment",
+					contentType: 'application/json',
+					data: 
+						{
+							purchaseNum:purchaseNum
+						},
+					success: function(){
+						window.location.href = "/purchase/payment?purchaseNum=" + purchaseNum;
+					}, 
+					error: function(){
+						alert("서버 오류");
+					}
+				})
 			}, 
 			error: function(){
 				alert("서버 오류");
