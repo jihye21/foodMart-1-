@@ -11,24 +11,26 @@ $(function(){
 			var goodsName = $(this).closest(".product-item").find("#goodsName").text();
 			var cartQty = $("#quantity").val();
 			
-			alert(goodsName);
-			$.ajax({
-				type: "POST",
-				url: "../cart/cartAdd",
-				data: {goodsName: goodsName, cartQty: cartQty},
-				success: function(){
-					alert("장바구니에 추가되었습니다.");
-				},
-				error: function(){
-					alert("로그인이 필요합니다.");
-					window.location = "../login/loginPage";
-				}
-			})
-			
+			if(cartQty > 0){
+				$.ajax({
+					type: "POST",
+					url: "../cart/cartAdd",
+					data: {goodsName: goodsName, cartQty: cartQty},
+					success: function(){
+						alert("장바구니에 추가되었습니다.");
+					},
+					error: function(){
+						alert("로그인이 필요합니다.");
+						window.location = "../login/loginPage";
+					}
+				})
+			}else {
+				alert("하나 이상의 상품을 담아주세요.");
+			}
 		})
 	
 	//장바구니 수량 감소
-	$(".quantity-left-minus").click(function(){
+	$(".quantity-left-minus.btn.btn-danger.btn-number.cart").click(function(){
 		let cartQty = $(this).closest(".input-group").find("#quantity").val();
 		var goodsName = $(this).closest(".list-group-item").find("#goodsName").val();
 		let goodsPrice = $(this).closest(".list-group-item").find(".price").val();
@@ -50,7 +52,7 @@ $(function(){
 		})
 	})
 	//장바구니 수량 증가
-	$(".quantity-right-plus").click(function(){
+	$(".quantity-right-plus.btn.btn-success.btn-number.cart").click(function(){
 			let cartQty = $(this).closest(".input-group").find("#quantity").val();
 			var goodsName = $(this).closest(".list-group-item").find("#goodsName").val();
 			let goodsPrice = $(this).closest(".list-group-item").find(".price").val();

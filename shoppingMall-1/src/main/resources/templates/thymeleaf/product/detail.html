@@ -169,7 +169,7 @@ $(function(){
                         </a>
                         <figure>
                           <a title="Product Title">
-                            <img th:src = "|../static/upload/${dto.goodsMainImage}|" class="tab-image" style = "width: 100%; height:100%">
+                            <img th:src = "|../static/upload/${dto.goodsMainImage}|" class="tab-image" style = "max-height: 210px; height: auto;">
                           </a>
                         </figure>
                         <h3 id = "goodsName">[[${dto.goodsName}]]</h3>
@@ -198,7 +198,7 @@ $(function(){
                     <div class="col">
                       <div class="product-item detail">
                         <figure>
-                            <img th:src = "|../static/upload/${dto.goodsDetailImage}|"  class="tab-image" style = "width: 100%">
+                            <img th:src = "|../static/upload/${dto.goodsDetailImage}|"  class="tab-image" style = "max-height: 210px; height: auto;">
                         </figure>
                         <span style = "font-size: 8px">[[${dto.goodsContents}]]</span>
                       </div>

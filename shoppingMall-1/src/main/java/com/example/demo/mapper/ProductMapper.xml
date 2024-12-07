@@ -14,7 +14,7 @@
 			)
 			values (
 			(select concat('goods_',
-			max(substr(goods_num, 7)) + 1) from goods)
+			max(nvl(substr(goods_num, 7), 10000)) + 1) from goods)
 			, #{goodsName}, #{goodsPrice}, #{goodsContents}
 			, #{goodsMainImage}, #{goodsMainStoreImage}
 			, #{goodsDetailImage}, #{goodsDetailStoreImage}

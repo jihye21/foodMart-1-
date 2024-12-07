@@ -34,21 +34,28 @@ public class PurchaseInfoService {
 		
 		List<ItemDTO> items = dto.getItems();
 		
+		//총 금액
 		Integer purchasePrice = 0;
 		
 		for(ItemDTO i : items) {
+			//unit price 합산하여 total price 계산하기
 			purchasePrice += i.getUnitPrice();
 		}
 		
 		InfoDTO info = dto.getInfo();
 		
-		info.setPurchaseName(memberNum);
+		info.setMemberNum(memberNum);
 		info.setPurchasePrice(purchasePrice);
-		
 		info.setPurchaseNum(purchaseNum);
 		
 		purchaseMapper.insert(info);
 		
+		for(ItemDTO i : items) {
+			//purchaseNum 추가하기
+			i.setPurchaseNum(purchaseNum);
+			//구매할 아이템 purchase_list에 추가하기
+			purchaseMapper.insertItem(i);
+		}
 		
 		return purchaseNum;
 	}

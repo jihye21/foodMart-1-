@@ -33,8 +33,15 @@
 		</select>
 		
 		<update id="updateList">
+			<if test="cartQty != 0">
 			update cart set 
 			cart_qty = #{cartQty} 
 			where goods_num = #{goodsNum} and member_num = #{memberNum}
+			</if>
+			
+			<if test="cartQty == 0">
+			delete from cart
+			where goods_num = #{goodsNum} and member_num = #{memberNum}
+			</if>
 		</update>
 	</mapper>

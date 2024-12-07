@@ -13,12 +13,14 @@
 		<insert id="insert" parameterType="infoDTO">
 			insert into purchase 
 			(PURCHASE_NUM, PURCHASE_DATE, PURCHASE_PRICE, DELIVERY_ADDR 
-			, DELIVERY_ADDR_DETAIL, DELIVERY_POST, DELIVERY_PHONE
-			, MESSAGE, PURCHASE_STATUS)
+			, DELIVERY_ADDR_DETAIL, DELIVERY_POST, DELIVERY_PHONE, DELIVERY_NAME
+			, MESSAGE, PURCHASE_STATUS
+			, MEMBER_NUM)
 			values (#{purchaseNum}
 			, SYSDATE, #{purchasePrice}, #{deliveryAddr}
-			, #{deliveryAddrDetail}, #{deliveryPost}, #{deliveryPhone}
-			, #{message}, '결제중')
+			, #{deliveryAddrDetail}, #{deliveryPost}, #{deliveryPhone}, #{deliveryName}
+			, #{message}, '결제중'
+			, #{memberNum})
 			
 		</insert>
 		
@@ -26,8 +28,35 @@
 			select PURCHASE_NUM, PURCHASE_DATE, PURCHASE_PRICE, DELIVERY_ADDR
 			, DELIVERY_ADDR_DETAIL, DELIVERY_POST, DELIVERY_PHONE
 			, MESSAGE, PURCHASE_STATUS, MEMBER_NUM, DELIVERY_NAME
-			, PURCHASE_NAME
 
-			from purchase where purchase_num = #{purchaseNum}
+			from purchase 
+			where purchase_num = #{purchaseNum}
+			
 		</select>
+		
+		<insert id="insertItem" parameterType="itemDTO">
+			insert into purchase_list 
+			(PURCHASE_NUM, GOODS_NUM, PURCHASE_QTY, GOODS_UNIT_PRICE)
+			values (#{purchaseNum}, #{goodsNum}, #{cartQty}, #{unitPrice})
+		</insert>
+		
+		<select id="goodsName" parameterType="string" resultType="string">
+			SELECT 
+			    MIN(goods_name) || ' 외 ' 
+			    || ( 
+			        (SELECT SUM(purchase_qty) FROM purchase_list WHERE purchase_num = #{purchaseNum}) - 1
+			    ) || '개'
+			FROM purchase_list pl
+			JOIN goods g ON g.goods_num = pl.goods_num
+			WHERE purchase_num = #{purchaseNum}
+			GROUP BY purchase_num
+		</select>
+		
+		<insert id="paymentInsert" parameterType="payment">
+		insert into payment(PURCHASE_NUM,CONFIRMNUMBER,CARDNUM,TID,TOTALPRICE
+		,RESULTMESSAGE,PAYMETHOD,APPLDATE,APPTIME)
+		values(#{purchaseNum},#{confirmnumber},#{cardnum},#{tid}
+		,#{totalprice},#{resultmassage}
+		,#{paymathod},#{appldate},#{appltime})
+		</insert>
 	</mapper>

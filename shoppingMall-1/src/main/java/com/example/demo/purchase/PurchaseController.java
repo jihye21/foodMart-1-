@@ -32,18 +32,17 @@ public class PurchaseController {
 		return ResponseEntity.ok(purchaseNum);
 	}
 	
-	
-	@PostMapping("payment")
-	public String payment1(@RequestParam String purchaseNum, Model model) {
-		iniPayReqService.execute(purchaseNum, model);
-		return "redirect:payment";
-	}
-	
 	@GetMapping("payment")
 	public String payment(@RequestParam String purchaseNum, Model model) {
-		System.out.println(purchaseNum);
+		
 		iniPayReqService.execute(purchaseNum, model);
 		return "thymeleaf/purchase/payment";
+	}
+	
+	@PostMapping("INIstdpay_pc_return")
+	public String iniReturn (){
+		
+		return "redirect:/";
 	}
 	
 }

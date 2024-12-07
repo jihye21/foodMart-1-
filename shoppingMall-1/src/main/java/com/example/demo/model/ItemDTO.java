@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 @Alias("itemDTO")
 public class ItemDTO {
+	String purchaseNum;
 	//구매할 상품
 	String goodsNum;
 	Integer cartQty;

@@ -1,6 +1,7 @@
 package com.example.demo.purchase.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class iniPayReqService {
 	public void execute(String purchaseNum, Model model) {
 		
 		InfoDTO info = purchaseMapper.selectOne(purchaseNum);
-		
+		System.out.println(info);
 		Integer purchasePrice = info.getPurchasePrice();
 		String deliveryName = info.getDeliveryName();
 		String purchaseName = info.getPurchaseName();
@@ -67,6 +68,11 @@ public class iniPayReqService {
 		model.addAttribute("deliveryName", deliveryName);
 		model.addAttribute("purchaseName", purchaseName);
 		model.addAttribute("deliveryPhone", deliveryPhone);
+		
+		//구매할 상품 이름 : ooo외 n개
+		String goodsName = purchaseMapper.goodsName(purchaseNum);
+		System.out.println(goodsName);
+		model.addAttribute("goodsName", goodsName);
 		
 	}
 	
