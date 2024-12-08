@@ -125,8 +125,8 @@ $(function(){
                   <div class="product-grid row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
                   
                     <div class="col">
-                      <div class="product-item">
-                        <span class="badge bg-success position-absolute m-3">품절 여부</span>
+                      <div class="product-item" style = "height:379px;">
+                        <!-- <span class="badge bg-success position-absolute m-3">품절 여부</span> -->
                         
                         <a href="" class="btn-wishlist">
                         	<a class="btn-wishlist" th:data-goods-name = "${dto.goodsName}">
@@ -169,11 +169,11 @@ $(function(){
                         </a>
                         <figure>
                           <a title="Product Title">
-                            <img th:src = "|../static/upload/${dto.goodsMainImage}|" class="tab-image" style = "max-height: 210px; height: auto;">
+                            <img th:src = "|../static/upload/${dto.goodsMainImage}|" class="tab-image" style = "max-height: 210px; height: auto; width:100%;">
                           </a>
                         </figure>
                         <h3 id = "goodsName">[[${dto.goodsName}]]</h3>
-                        <span class="qty">view count</span><span class="rating"><svg width="24" height="24" class="text-primary"><use xlink:href="#star-solid"></use></svg> 4.5</span>
+                        <span class="qty">1 UNIT</span><span class="rating"><svg width="24" height="24" class="text-primary"><use xlink:href="#star-solid"></use></svg> </span>
                         <span class="price">[[${dto.goodsPrice}]]</span>
                         <div class="d-flex align-items-center justify-content-between">
                           <div class="input-group product-qty">
@@ -196,11 +196,11 @@ $(function(){
                     
                     <!-- 상세 설명칸 -->
                     <div class="col">
-                      <div class="product-item detail">
+                      <div class="product-item detail" style = "height:379px;">
                         <figure>
-                            <img th:src = "|../static/upload/${dto.goodsDetailImage}|"  class="tab-image" style = "max-height: 210px; height: auto;">
+                            <img th:src = "|../static/upload/${dto.goodsDetailImage}|"  class="tab-image" style = "max-height: 210px; height: auto;width:100%;">
                         </figure>
-                        <span style = "font-size: 8px">[[${dto.goodsContents}]]</span>
+                        <span style = "font-size: 15px">[[${dto.goodsContents}]]</span>
                       </div>
                     </div>
                     
