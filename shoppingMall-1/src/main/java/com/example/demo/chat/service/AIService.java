@@ -14,8 +14,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Service
 public class AIService {
 	
-	private static final String AI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyC-Nj52zLB0e3t73TX3-qfoWWB1-Ke9aak";
-    private static final String API_KEY = "AIzaSyC-Nj52zLB0e3t73TX3-qfoWWB1-Ke9aak";
+	private static final String AI_API_URL;
+    private static final String API_KEY = "";
 
    
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
